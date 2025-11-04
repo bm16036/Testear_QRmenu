@@ -21,17 +21,6 @@ El foco de este incremento incluye:
 
 ---
 
-## Estructura relevante
-
-src/
-├── app/
-│   ├── core/        # Modelos, servicios y guard de autenticación
-│   ├── features/    # Componentes de login y módulos administrativos
-│   └── styles/      # Estilos compartidos para las pantallas de gestión
-└── environments/    # Configuración (API base y uso de mocks)
-
----
-
 ## Datos de acceso
 
 Credenciales de prueba:

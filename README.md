@@ -16,23 +16,20 @@ El foco de este incremento incluye:
 
 - Pantalla de inicio de sesión.  
 - Panel de administración protegido.  
-- Módulos CRUD de **Empresas**, **Categorías**, **Productos** y **Usuarios**.  
-- Integración con servicios de conexión (API real y mock).
+- Módulos CRUD de **Empresas**, **Categorías**,**Menus**, **Productos** y **Usuarios**.  
+- Integración con servicios de conexión.
 
 ---
 
 ## Estructura relevante
 
+```bash
 src/
 ├── app/
-│ ├── core/ # Modelos, servicios y guard de autenticación
-│ ├── features/ # Componentes de login y módulos administrativos
-│ └── styles/ # Estilos compartidos para las pantallas de gestión
-└── environments/ # Configuración (API base y uso de mocks)
-
-yaml
-Copiar código
-
+│   ├── core/        # Modelos, servicios y guard de autenticación
+│   ├── features/    # Componentes de login y módulos administrativos
+│   └── styles/      # Estilos compartidos para las pantallas de gestión
+└── environments/    # Configuración de conexion
 ---
 
 ## Datos de acceso
@@ -51,7 +48,8 @@ El sistema permite al administrador:
 
 - Iniciar sesión y acceder al panel administrativo.  
 - Gestionar **Empresas**: RUC, razón social, logo y contactos.  
-- Gestionar **Categorías**: nombre y estado activo/inactivo.  
+- Gestionar **Categorías**: nombre y estado activo/inactivo.
+- Gestionar **Menus**: nombre y estado activo/inactivo.   
 - Gestionar **Productos**: código, nombre, descripción, precio y categoría.  
 - Gestionar **Usuarios**: nombre, rol y empresa asociada.
 
@@ -62,15 +60,16 @@ El sistema permite al administrador:
 - **Node.js:** 20 o superior  
 - **npm:** 10 o superior  
 - **Angular CLI:** 17+  
-- **Docker Desktop** (opcional, para despliegue con Compose)
+- **Docker Desktop**
 
 ---
 
 ## Ejecución rápida
 
-### Opción 1 — Docker
+### Docker
 
 ```bash
 docker compose up --build
+
 El servidor de Angular se iniciará en:
 http://localhost:4200

@@ -23,7 +23,13 @@ export class CompanyManagementComponent {
   readonly isSaving = signal(false);
 
   readonly companyForm = this.fb.nonNullable.group({
-    taxId: ['', [Validators.required, Validators.pattern(/^\d{11,13}$/)]],
+    taxId: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(/^\d{13}$/) // ✅ exactamente 13 dígitos
+      ]
+    ],
     businessName: ['', [Validators.required, Validators.maxLength(120)]],
     commercialName: ['', [Validators.required, Validators.maxLength(80)]],
     email: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
@@ -61,6 +67,13 @@ export class CompanyManagementComponent {
   save() {
     if (this.companyForm.invalid) {
       this.companyForm.markAllAsTouched();
+
+      // 🔴 mensaje personalizado para el campo RUC
+      if (this.companyForm.get('taxId')?.errors?.['pattern']) {
+        this.feedbackMessage.set('El campo RUC debe tener exactamente 13 dígitos.');
+      } else {
+        this.feedbackMessage.set('Por favor, completa correctamente todos los campos obligatorios.');
+      }
       return;
     }
 

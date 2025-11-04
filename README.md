@@ -1,89 +1,74 @@
-#  Menú Digital — Incremento Frontend
+##Menú Digital — Incremento Frontend
 
-Interfaz administrativa desarrollada en **Angular 17+** para gestionar menús digitales multiempresa. Este incremento se centra en las vistas del administrador y deja listos los puntos de integración con el backend (Spring/Node) y la base de datos Neon PostgreSQL.
+Interfaz administrativa desarrollada en Angular 17+ para la gestión de menús digitales multiempresa, conectada a un backend desarrollado en Java (Spring Boot).
+Este incremento se centra en las vistas del administrador, la validación de formularios y la organización modular del panel.
 
-##  Contenido del repositorio
+##Contenido del repositorio
 
-- `men--digital-main/`: código fuente de la aplicación Angular, Docker y scripts auxiliares.
-- `package.json`: marcador del workspace raíz (no contiene dependencias).
+El repositorio contiene dos módulos principales:
 
-> Sitúate dentro de `men--digital-main/` para ejecutar cualquier comando de desarrollo.
+men--digital-main/ → Proyecto Angular (frontend administrativo).
 
-##  Funcionalidades incluidas
+menu-backend-public/ → Proyecto Spring Boot (backend REST).
 
-- **Inicio de sesión** con selección de empresa y manejo de sesión mediante JWT (mock en esta versión).
-- **Panel de control** con métricas generales de categorías, productos y usuarios.
-- **Gestión de categorías**: crear, editar, activar/inactivar y eliminar.
-- **Gestión de menús**: crear, editar, activar/inactivar y eliminar.
-- **Gestión de productos/platillos**: CRUD completo con relación a categorías y menús, además de vista previa de precios.
-- **Gestión de usuarios**: creación de administradores/usuarios, asignación de empresa y control de estado.
-- **Gestión de empresas**: mantenimiento del catálogo de negocios (RUC, razón social, logo, etc.).
+El foco de este incremento incluye:
 
-##  Estructura relevante
+Pantalla de inicio de sesión.
 
-```
+Panel de administración protegido.
+
+Módulos CRUD de Empresas, Categorías, Productos y Usuarios.
+
+Integración con servicios de conexión.
+
+##Estructura relevante
+
 src/
 ├── app/
 │   ├── core/        # Modelos, servicios y guard de autenticación
 │   ├── features/    # Componentes de login y módulos administrativos
 │   └── styles/      # Estilos compartidos para las pantallas de gestión
 └── environments/    # Configuración (API base y uso de mocks)
-```
 
-## 🔐 Datos de prueba
+##Datos de acceso
 
-Mientras `environment.useMockData = true`, puedes acceder con las siguientes credenciales:
+Credenciales de prueba:
 
-- **Correo:** `admin@saboresdelmar.com`
-- **Contraseña:** `admin123`
-- **Empresa:** `Sabores del Mar`
+Correo: admin@resto.test
 
-> Cambia `useMockData` a `false` cuando el backend esté operativo. Todos los servicios HTTP (`AuthService`, `CategoryService`, etc.) ya apuntan a los endpoints REST esperados.
+Contraseña: admin123
 
-##  Puesta en marcha
+Empresa: Mi Restaurante
 
-### Requisitos
+##Descripción general
 
-- Node.js 20+
-- npm 10+
-- Angular CLI 
+El sistema permite al administrador:
 
-### Pasos rápidos
+Iniciar sesión y acceder al panel.
 
-```bash
-cd men--digital-main/
-npm install
-npm start
-```
+Gestionar Empresas: RUC, razón social, logo y contactos.
 
-El servidor de Angular se iniciará en `http://localhost:4200`. Para cambiar el puerto puedes usar `ng serve --port 80` o actualizar la configuración de Docker descrita abajo.
+Gestionar Categorías: nombre y estado activo/inactivo.
 
-### Otros comandos útiles
+Gestionar Productos: código, nombre, descripción, precio y categoría.
 
-- `npm run build`: genera la versión de producción en `dist/`.
-- `npm test`: ejecuta las pruebas unitarias configuradas con Karma/Jasmine.
+Gestionar Usuarios: nombre, rol y empresa asociada.
 
-##  Configuración de entornos
+##Requisitos
 
-El frontend toma la URL base del backend desde `src/environments/environment*.ts`:
+Node.js: 20 o superior
 
-```ts
-export const environment = {
-  production: false,
-  apiBaseUrl: 'http://localhost:3000/api',
-  useMockData: true
-};
-```
+npm: 10 o superior
 
-- Actualiza `apiBaseUrl` con el endpoint del backend.
-- Cambia `useMockData` a `false` para consumir datos reales.
+Angular CLI: 17+
 
-##  Próximas implementaciones
+Docker Desktop
 
-1. Conectar los servicios Angular con los endpoints del backend (Spring Security + JWT).
-2. Añadir interceptores para adjuntar el token JWT en cada petición HTTP.
-3. Sustituir el mock de autenticación por el flujo real (registro, activación y login).
-4. Añadir validaciones backend y mensajes de error detallados en la UI.
+##Ejecución rápida
 
-Revisa cada servicio en `src/app/core/services` para conocer el contrato esperado por la API.
+docker compose up --build
+
+
+##El servidor de Angular se iniciará en
+http://localhost:4200
 

@@ -14,14 +14,33 @@
       <h2>{{ selectedCompanyId() ? 'Editar empresa' : 'Nueva empresa' }}</h2>
 
       <form [formGroup]="companyForm" (ngSubmit)="save()" class="form">
+        <!-- RUC -->
         <label class="form__field">
           <span>RUC / Registro fiscal</span>
-          <input type="text" formControlName="taxId" placeholder="RUC" />
-          <small class="form__error" *ngIf="companyForm.get('taxId')?.invalid && companyForm.get('taxId')?.touched">
-            Ingresa un RUC válido de 11 a 13 dígitos.
+          <input
+            type="text"
+            formControlName="taxId"
+            placeholder="Ingrese el RUC de 13 dígitos"
+            maxlength="13"
+          />
+          <!-- mensaje de ayuda -->
+          <small class="form__hint">El RUC debe contener exactamente 13 dígitos numéricos.</small>
+
+          <!-- mensaje de error -->
+          <small
+            class="form__error"
+            *ngIf="companyForm.get('taxId')?.invalid && companyForm.get('taxId')?.touched"
+          >
+            <ng-container *ngIf="companyForm.get('taxId')?.errors?.['required']">
+              El campo RUC es obligatorio.
+            </ng-container>
+            <ng-container *ngIf="companyForm.get('taxId')?.errors?.['pattern']">
+              El campo RUC debe tener exactamente 13 dígitos.
+            </ng-container>
           </small>
         </label>
 
+        <!-- Razón social -->
         <label class="form__field">
           <span>Razón social</span>
           <input type="text" formControlName="businessName" placeholder="Nombre legal" />
@@ -30,6 +49,7 @@
           </small>
         </label>
 
+        <!-- Nombre comercial -->
         <label class="form__field">
           <span>Nombre comercial</span>
           <input type="text" formControlName="commercialName" placeholder="Nombre para clientes" />
@@ -38,6 +58,7 @@
           </small>
         </label>
 
+        <!-- Correo -->
         <label class="form__field">
           <span>Correo electrónico</span>
           <input type="email" formControlName="email" placeholder="contacto@empresa.com" />
@@ -46,6 +67,7 @@
           </small>
         </label>
 
+        <!-- Teléfono -->
         <label class="form__field">
           <span>Teléfono</span>
           <input type="tel" formControlName="phone" placeholder="+503 0000 0000" />
@@ -54,6 +76,7 @@
           </small>
         </label>
 
+        <!-- Logo -->
         <label class="form__field">
           <span>Logo</span>
           <input type="url" formControlName="logoUrl" placeholder="https://" />
@@ -71,6 +94,7 @@
       </form>
     </section>
 
+    <!-- Listado -->
     <section class="panel">
       <h2>Listado de empresas</h2>
 

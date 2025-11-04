@@ -1,74 +1,76 @@
-##Menú Digital — Incremento Frontend
+## Menú Digital
 
-Interfaz administrativa desarrollada en Angular 17+ para la gestión de menús digitales multiempresa, conectada a un backend desarrollado en Java (Spring Boot).
+Interfaz administrativa desarrollada en **Angular 17+** para la gestión de menús digitales multiempresa, conectada a un backend desarrollado en **Java (Spring Boot)**.  
 Este incremento se centra en las vistas del administrador, la validación de formularios y la organización modular del panel.
 
-##Contenido del repositorio
+---
+
+## Contenido del repositorio
 
 El repositorio contiene dos módulos principales:
 
-men--digital-main/ → Proyecto Angular (frontend administrativo).
-
-menu-backend-public/ → Proyecto Spring Boot (backend REST).
+- **men--digital-main/** → Proyecto **Angular** (frontend administrativo).  
+- **menu-backend-public/** → Proyecto **Spring Boot** (backend REST).
 
 El foco de este incremento incluye:
 
-Pantalla de inicio de sesión.
+- Pantalla de inicio de sesión.  
+- Panel de administración protegido.  
+- Módulos CRUD de **Empresas**, **Categorías**, **Productos** y **Usuarios**.  
+- Integración con servicios de conexión (API real y mock).
 
-Panel de administración protegido.
+---
 
-Módulos CRUD de Empresas, Categorías, Productos y Usuarios.
-
-Integración con servicios de conexión.
-
-##Estructura relevante
+## Estructura relevante
 
 src/
 ├── app/
-│   ├── core/        # Modelos, servicios y guard de autenticación
-│   ├── features/    # Componentes de login y módulos administrativos
-│   └── styles/      # Estilos compartidos para las pantallas de gestión
-└── environments/    # Configuración (API base y uso de mocks)
+│ ├── core/ # Modelos, servicios y guard de autenticación
+│ ├── features/ # Componentes de login y módulos administrativos
+│ └── styles/ # Estilos compartidos para las pantallas de gestión
+└── environments/ # Configuración (API base y uso de mocks)
 
-##Datos de acceso
+yaml
+Copiar código
+
+---
+
+## Datos de acceso
 
 Credenciales de prueba:
 
-Correo: admin@resto.test
+- **Correo:** admin@resto.test  
+- **Contraseña:** admin123  
+- **Empresa:** Mi Restaurante
 
-Contraseña: admin123
+---
 
-Empresa: Mi Restaurante
-
-##Descripción general
+## Descripción general
 
 El sistema permite al administrador:
 
-Iniciar sesión y acceder al panel.
+- Iniciar sesión y acceder al panel administrativo.  
+- Gestionar **Empresas**: RUC, razón social, logo y contactos.  
+- Gestionar **Categorías**: nombre y estado activo/inactivo.  
+- Gestionar **Productos**: código, nombre, descripción, precio y categoría.  
+- Gestionar **Usuarios**: nombre, rol y empresa asociada.
 
-Gestionar Empresas: RUC, razón social, logo y contactos.
+---
 
-Gestionar Categorías: nombre y estado activo/inactivo.
+## Requisitos
 
-Gestionar Productos: código, nombre, descripción, precio y categoría.
+- **Node.js:** 20 o superior  
+- **npm:** 10 o superior  
+- **Angular CLI:** 17+  
+- **Docker Desktop** (opcional, para despliegue con Compose)
 
-Gestionar Usuarios: nombre, rol y empresa asociada.
+---
 
-##Requisitos
+## Ejecución rápida
 
-Node.js: 20 o superior
+### Opción 1 — Docker
 
-npm: 10 o superior
-
-Angular CLI: 17+
-
-Docker Desktop
-
-##Ejecución rápida
-
+```bash
 docker compose up --build
-
-
-##El servidor de Angular se iniciará en
+El servidor de Angular se iniciará en:
 http://localhost:4200
-

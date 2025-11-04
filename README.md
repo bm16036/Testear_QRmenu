@@ -1,63 +1,136 @@
-## Menú Digital 
+# Proyecto: Dockerización y Primer Incremento del Sistema
 
-Interfaz administrativa desarrollada en **Angular 17+** para la gestión de menús digitales multiempresa, conectada a un backend desarrollado en **Java (Spring Boot)**.  
-Este incremento se centra en las vistas del administrador, la validación de formularios y la organización modular del panel.
+## Descripción General
+Este proyecto corresponde al primer incremento funcional del Sistema de Gestión de Menús  El objetivo es permitir la administración centralizada de:
+- Empresas
+- Usuarios
+- Menús
+- Categorías
+- Productos
 
----
-
-## Contenido del repositorio
-
-El repositorio contiene dos módulos principales:
-
-- **men--digital-main/** → Proyecto **Angular** (frontend administrativo).  
-- **menu-backend-public/** → Proyecto **Spring Boot** (backend REST).
-
-El foco de este incremento incluye:
-
-- Pantalla de inicio de sesión.  
-- Panel de administración protegido.  
-- Módulos CRUD de **Empresas**, **Categorías**, **Productos** y **Usuarios**.  
-- Integración con servicios de conexión.
+Todo el sistema se encuentra dockerizado para permitir su puesta en marcha mediante un solo comando utilizando **Docker Compose**, asegurando portabilidad, estandarización e independencia de configuraciones locales.
 
 ---
 
-## Datos de acceso
+## Tecnologías Utilizadas
 
-Credenciales de prueba:
-
-- **Correo:** admin@resto.test  
-- **Contraseña:** admin123  
-- **Empresa:** Mi Restaurante
-
----
-
-## Descripción general
-
-El sistema permite al administrador:
-
-- Iniciar sesión y acceder al panel administrativo.  
-- Gestionar **Empresas**: RUC, razón social, logo y contactos.  
-- Gestionar **Categorías**: nombre y estado activo/inactivo.  
-- Gestionar **Productos**: código, nombre, descripción, precio y categoría.  
-- Gestionar **Usuarios**: nombre, rol y empresa asociada.
+| Capa | Tecnología |
+|------|------------|
+| Frontend | React + Vite, JavaScript, CSS Modules |
+| Backend | Java 17, Spring Boot, Spring Security, Spring Data JPA |
+| Base de Datos | PostgreSQL (Imagen oficial Docker) |
+| Contenedores | Docker |
+| Orquestación | Docker Compose |
+| Control de Versiones | Git / GitHub |
 
 ---
 
-## Requisitos
+## Incremento Frontend (Interfaz Administrativa)
 
-- **Node.js:** 20 o superior  
-- **npm:** 10 o superior  
-- **Angular CLI:** 17+  
-- **Docker Desktop**
+### Descripción
+El frontend es una aplicación desarrollada en **React + Vite**, orientada a la gestión operativa desde una interfaz administrativa. La aplicación se comunica con el backend mediante solicitudes HTTP y utiliza token JWT para mantener la sesión activa.
+
+### Contenido del Repositorio
+```
+men--digital-main/
+├── src/
+│   ├── auth/          # Módulos de autenticación y control de acceso
+│   ├── services/      # Llamadas a la API REST
+│   ├── components/    # Componentes reutilizables
+│   ├── views/         # Pantallas CRUD del sistema
+│   └── styles/        # Estilos globales
+├── Dockerfile          # Imagen Docker del frontend
+└── vite.config.js
+```
+
+### Funcionalidades Incluidas
+- Inicio de sesión con token JWT.
+- Panel general de administración.
+- CRUD completo de **Empresas**, **Usuarios**, **Menús**, **Categorías** y **Productos**.
+- Control de roles y acceso restringido mediante guardias de rutas.
+
+### Configuración del Backend en el Frontend
+Archivo:
+```
+men--digital-main/src/config/api.js
+```
+Valor inicial sugerido:
+```js
+export const API_BASE_URL = "http://localhost:8080";
+```
 
 ---
 
-## Ejecución rápida
+## Incremento Backend (API REST)
 
-### Docker:
+### Descripción
+El backend fue desarrollado utilizando **Spring Boot**, proporcionando los servicios REST necesarios para la gestión del sistema. Se implementa autenticación con **JWT** y acceso a la base de datos mediante **JPA**.
+
+### Contenido del Repositorio
+```
+menu-backend-public/
+├── controller/     # Endpoints REST
+├── service/        # Lógica de negocio
+├── repository/     # Acceso a datos
+├── entity/         # Modelado de tablas
+├── security/       # Autenticación y autorización con JWT
+├── resources/
+│   └── application.yml
+└── Dockerfile       # Imagen Docker del backend
+```
+
+### Funcionalidades Implementadas
+| Módulo | Funcionalidad |
+|--------|--------------|
+| Autenticación | Inicio de sesión y validación mediante JWT |
+| Empresas | CRUD completo |
+| Usuarios | CRUD con control de rol y estado |
+| Menús | CRUD vinculado a empresa |
+| Categorías | CRUD vinculado a menús |
+| Productos | CRUD vinculado a categorías |
+
+---
+
+## Base de Datos
+- Motor: **PostgreSQL**
+- Tablas generadas mediante entidades JPA
+- Persistencia garantizada utilizando volúmenes Docker
+
+---
+
+## Dockerización del Sistema
+
+El archivo principal para levantar todo el sistema es:
+```
+docker-compose.yml
+```
+
+### Levantar el Proyecto
+```bash
+git clone -b main --single-branch https://github.com/Steven2623/men--digital.git
+
+cd men--digital
 
 docker compose up --build
+```
 
-## El servidor de Angular se iniciará en:
+### Acceso a los Servicios
 
-http://localhost:4200
+| Servicio | URL |
+|---------|------|
+| Frontend | http://localhost:3000 |
+| Backend | http://localhost:8080 |
+| PostgreSQL | localhost:5432 |
+
+
+## Resultado del Incremento
+
+| Elemento | Estado | Descripción |
+|---------|--------|-------------|
+| Frontend | Completo | Interfaz administrativa funcional |
+| Backend |  Completo | API REST operativa y protegida |
+| Base de Datos |  Configurada | Persistencia estable y estructurada |
+| Dockerización |  Finalizada | El sistema se ejecuta con un solo comando |
+
+---
+

@@ -17,7 +17,7 @@ El foco de este incremento incluye:
 - Pantalla de inicio de sesión.  
 - Panel de administración protegido.  
 - Módulos CRUD de **Empresas**, **Categorías**, **Productos** y **Usuarios**.  
-- Integración con servicios de conexión (API real y mock).
+- Integración con servicios de conexión.
 
 ---
 
@@ -48,7 +48,7 @@ El sistema permite al administrador:
 - **Node.js:** 20 o superior  
 - **npm:** 10 o superior  
 - **Angular CLI:** 17+  
-- **Docker Desktop** (opcional, para despliegue con Compose)
+- **Docker Desktop**
 
 ---
 
